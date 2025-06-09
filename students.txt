@@ -1,0 +1,6 @@
+1 Aashish Shakya 3 23 9876543211
+2 Amodh Nepal 3 24 9876564534
+3 Ishan Pradhan 1 23 9802134567
+4 Pranish Shakya 5 24 9808877655
+5 Pratham RanaMagar 5 24 9876545678
+6 Prajwol Maharjan 4 23 9876789065
