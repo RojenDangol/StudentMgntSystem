@@ -1,6 +1,8 @@
-1 Aashish Shakya 3 23 9876543211
-2 Amodh Nepal 3 24 9876564534
-3 Ishan Pradhan 1 23 9802134567
-4 Pranish Shakya 5 24 9808877655
-5 Pratham RanaMagar 5 24 9876545678
-6 Prajwol Maharjan 4 23 9876789065
+1 aashish shakya 4 23 9876543211
+2 amodh nepal 3 24 9876564534
+3 ishan pradhan 1 23 9802134567
+4 pranish shakya 5 24 9808877655
+5 pratham magar 5 24 9876545678
+6 prajwol maharjan 4 23 9876789065
+7 rijen maharjan 3 24 98078675689
+8 tisha maharjan 6 23 9860561195

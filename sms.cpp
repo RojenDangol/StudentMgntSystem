@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <string>
 #include <sstream>
+#include <cctype>  
 using namespace std;
 
 struct Student {
@@ -84,10 +85,14 @@ void addStudent(vector<Student> &students) {
 
             if (!exists) break;  // roll number is unique, exit loop
         }
-        cout << "Enter First Name: ";
+       cout << "Enter First Name: ";
         cin >> s.firstName;
+        transform(s.firstName.begin(), s.firstName.end(), s.firstName.begin(), ::tolower);
+
         cout << "Enter Last Name: ";
         cin >> s.lastName;
+        transform(s.lastName.begin(), s.lastName.end(), s.lastName.begin(), ::tolower);
+
         cout << "Enter Course ID: ";
         cin >> s.courseID;
         cout << "Enter Age: "; 
@@ -120,68 +125,109 @@ void addStudent(vector<Student> &students) {
 }
 
 void searchByRollNo(const vector<Student> &students){
-    int roll;
-    cout << "Enter Roll Number to search: ";
-    cin >> roll;
-    bool found = false;
-    for(const auto &s : students) {
-        if(s.rollNo == roll) {
-            cout << "\nStudent Found:\n";
-            cout << "Roll No: " << s.rollNo << endl;
-            cout << "Name: " << s.firstName << " " << s.lastName << endl;
-            cout << "Course ID: " << s.courseID << endl;
-            cout << "Age: " << s.age << endl;
-            cout << "Contact: " << s.contactNo << endl;
-            found = true;
-            break;
+    char choice;
+    do{
+        int roll;
+        cout << "Enter Roll Number to search: ";
+        cin >> roll;
+        bool found = false;
+        for(const auto &s : students) {
+            if(s.rollNo == roll) {
+                cout << "\nStudent Found:\n";
+                cout << "Roll No: " << s.rollNo << endl;
+                string fName = s.firstName;
+                string lName = s.lastName;
+
+                if (!fName.empty()) fName[0] = toupper(fName[0]);
+                if (!lName.empty()) lName[0] = toupper(lName[0]);
+
+                cout << "Name: " << fName << " " << lName << endl;
+                cout << "Course ID: " << s.courseID << endl;
+                cout << "Age: " << s.age << endl;
+                cout << "Contact: " << s.contactNo << endl;
+                found = true;
+                break;
+            }
         }
-    }
-    if(!found) {
-        cout << "No student found with Roll Number: " << roll << endl;
-    }
+        if(!found) {
+            cout << "No student found with Roll Number: " << roll << endl;
+        }
+        cout << "Search another student? (Y/N): ";
+        cin >> choice;
+        std::cout << "----------------------------------------" << std::endl;
+        cin.ignore();
+    }while(choice == 'y' || choice == 'Y');
 }
 
 void searchByFirstName(const vector<Student> &students){
-    string fName;
-    cout << "Enter First Name to search: ";
-    cin >> fName;
-    bool found = false;
-    for (auto &s: students){
-        if(s.firstName == fName) {
-            cout << "\nStudent Found:\n";
-            cout << "Roll No: " << s.rollNo << endl;
-            cout << "Name: " << s.firstName << " " << s.lastName << endl;
-            cout << "Course ID: " << s.courseID << endl;
-            cout << "Age: " << s.age << endl;
-            cout << "Contact: " << s.contactNo << endl;
-            found = true;
-            break;
+    char choice;
+    do{
+        string fName;
+        cout << "Enter First Name to search: ";
+        cin >> fName;
+        transform(fName.begin(), fName.end(), fName.begin(), ::tolower);
+        bool found = false;
+        for (auto &s: students){
+            if(s.firstName == fName) {
+                cout << "\nStudent Found:\n";
+                cout << "Roll No: " << s.rollNo << endl;
+                string fName = s.firstName;
+                string lName = s.lastName;
+
+                if (!fName.empty()) fName[0] = toupper(fName[0]);
+                if (!lName.empty()) lName[0] = toupper(lName[0]);
+
+                cout << "Name: " << fName << " " << lName << endl;
+                cout << "Course ID: " << s.courseID << endl;
+                cout << "Age: " << s.age << endl;
+                cout << "Contact: " << s.contactNo << endl;
+                found = true;
+                break;
+            }
         }
-    }
-    if(!found){
-        cout << "No student found with First Name: " << fName << endl;
-    }
+        if(!found){
+            cout << "No student found with First Name: " << fName << endl;
+        }
+        cout << "Search another student? (Y/N): ";
+        cin >> choice;
+        std::cout << "----------------------------------------" << std::endl;
+        cin.ignore();
+    }while(choice == 'y' || choice == 'Y');
 }
 
 void searchByCourseId(const vector<Student> &students){
-    string courseid;
-    cout << "Enter Course ID to search: ";
-    cin >> courseid;
-    bool found = false;
-    for (auto &s: students){
-        if(s.courseID == courseid) {
-            cout << "\nStudent Found:\n";
-            cout << "Roll No: " << s.rollNo << endl;
-            cout << "Name: " << s.firstName << " " << s.lastName << endl;
-            cout << "Course ID: " << s.courseID << endl;
-            cout << "Age: " << s.age << endl;
-            cout << "Contact: " << s.contactNo << endl;
-            found = true;
+    char choice;
+    do{
+        string courseid;
+        cout << "Enter Course ID to search: ";
+        cin >> courseid;
+        bool found = false;
+        for (auto &s: students){
+            if(s.courseID == courseid) {
+                cout << "\nStudent Found:\n";
+                cout << "Roll No: " << s.rollNo << endl;
+                string fName = s.firstName;
+                string lName = s.lastName;
+
+                if (!fName.empty()) fName[0] = toupper(fName[0]);
+                if (!lName.empty()) lName[0] = toupper(lName[0]);
+
+                cout << "Name: " << fName << " " << lName << endl;
+                cout << "Course ID: " << s.courseID << endl;
+                cout << "Age: " << s.age << endl;
+                cout << "Contact: " << s.contactNo << endl;
+                found = true;
+            }
         }
-    }
-    if(!found){
-        cout << "No student found with First Name: " << courseid << endl;
-    }
+        if(!found){
+            cout << "No student found with First Name: " << courseid << endl;
+        }
+        cout << "Search another course? (Y/N): ";
+        cin >> choice;
+        std::cout << "----------------------------------------" << std::endl;
+        cin.ignore();
+    }while(choice == 'y' || choice == 'Y');
+    
 }
 
 void countStudents(const vector<Student> &students){
@@ -193,90 +239,111 @@ void countStudents(const vector<Student> &students){
 }
 
 void displayStudents(const vector<Student> &students){
+    cout << "\nDisplaying all the Students:\n";
     for(auto &s: students){
-        cout << "\nDisplaying all the Students:\n";
         cout << "Roll No: " << s.rollNo << endl;
-        cout << "Name: " << s.firstName << " " << s.lastName << endl;
+        string fName = s.firstName;
+        string lName = s.lastName;
+
+        if (!fName.empty()) fName[0] = toupper(fName[0]);
+        if (!lName.empty()) lName[0] = toupper(lName[0]);
+
+        cout << "Name: " << fName << " " << lName << endl;
         cout << "Course ID: " << s.courseID << endl;
         cout << "Age: " << s.age << endl;
         cout << "Contact: " << s.contactNo << endl;
     }
 }
 
-void deleteStudent(vector<Student> &students) {
-    int roll;
-    cout << "Enter Roll Number of the student to delete: ";
-    cin >> roll;
+void updateStudent(vector<Student> &students){
+    char choice;
+    do{
+        int roll;
+        cout << "Enter Roll Number of the student to update: ";
+        cin >> roll;
+        cin.ignore();
 
-    bool found = false;
-    for(auto it = students.begin(); it != students.end(); ++it){
-        if(it->rollNo == roll){
-            students.erase(it);
-            found = true;
-            cout << "Student with Roll Number " << roll << " has been deleted." << endl;
-            break;
+        bool found = false;
+        for(auto &s : students){
+            if(s.rollNo == roll){
+                cout << "Student found. Enter new details:\n";
+
+                string input;
+
+                cout << "First Name [" << s.firstName << "]: ";
+                getline(cin, input);
+                if (!input.empty()) s.firstName = input;
+
+                cout << "Last Name [" << s.lastName << "]: ";
+                getline(cin, input);
+                if (!input.empty()) s.lastName = input;
+
+                cout << "Course ID [" << s.courseID << "]: ";
+                getline(cin, input);
+                if (!input.empty()) s.courseID = input;
+
+                cout << "Age [" << s.age << "]: ";
+                getline(cin, input);
+                if (!input.empty()) {
+                    stringstream ss(input);
+                    int age;
+                    if (ss >> age) s.age = age;
+                }
+
+                cout << "Contact Number [" << s.contactNo << "]: ";
+                getline(cin, input);
+                if (!input.empty()) {
+                    stringstream ss(input);
+                    int contact;
+                    if (ss >> contact) s.contactNo = contact;
+                }
+
+
+                found = true;
+                break;
+            }
         }
-    }
 
-    if(!found){
-        cout << "No student found with Roll Number: " << roll << endl;
-    }else{
-        updateStudentsToFile(students);
-    }
+        if(!found){
+            cout << "No student found with Roll Number: " << roll << endl;
+        }else{
+            updateStudentsToFile(students);
+        }
+        cout << "Update another student? (Y/N): ";
+        cin >> choice;
+        std::cout << "----------------------------------------" << std::endl;
+        cin.ignore();
+    }while(choice == 'y' || choice == 'Y');
+    
 }
 
-void updateStudent(vector<Student> &students){
-    int roll;
-    cout << "Enter Roll Number of the student to update: ";
-    cin >> roll;
-    cin.ignore();
+void deleteStudent(vector<Student> &students) {
+    char choice;
+    do{
+        int roll;
+        cout << "Enter Roll Number of the student to delete: ";
+        cin >> roll;
 
-    bool found = false;
-    for(auto &s : students){
-        if(s.rollNo == roll){
-            cout << "Student found. Enter new details:\n";
-
-            string input;
-
-            cout << "First Name [" << s.firstName << "]: ";
-            getline(cin, input);
-            if (!input.empty()) s.firstName = input;
-
-            cout << "Last Name [" << s.lastName << "]: ";
-            getline(cin, input);
-            if (!input.empty()) s.lastName = input;
-
-            cout << "Course ID [" << s.courseID << "]: ";
-            getline(cin, input);
-            if (!input.empty()) s.courseID = input;
-
-            cout << "Age [" << s.age << "]: ";
-            getline(cin, input);
-            if (!input.empty()) {
-                stringstream ss(input);
-                int age;
-                if (ss >> age) s.age = age;
+        bool found = false;
+        for(auto it = students.begin(); it != students.end(); ++it){
+            if(it->rollNo == roll){
+                students.erase(it);
+                found = true;
+                cout << "Student with Roll Number " << roll << " has been deleted." << endl;
+                break;
             }
-
-            cout << "Contact Number [" << s.contactNo << "]: ";
-            getline(cin, input);
-            if (!input.empty()) {
-                stringstream ss(input);
-                int contact;
-                if (ss >> contact) s.contactNo = contact;
-            }
-
-
-            found = true;
-            break;
         }
-    }
 
-    if(!found){
-        cout << "No student found with Roll Number: " << roll << endl;
-    }else{
-        updateStudentsToFile(students);
-    }
+        if(!found){
+            cout << "No student found with Roll Number: " << roll << endl;
+        }else{
+            updateStudentsToFile(students);
+        }
+        cout << "Delete another student? (Y/N): ";
+        cin >> choice;
+        std::cout << "----------------------------------------" << std::endl;
+        cin.ignore();
+    }while(choice == 'y' || choice == 'Y');
 }
 
 int main(){
